@@ -14,6 +14,7 @@ namespace ConsoleApp1
         static SerialPort sPort = new SerialPort();
         public static void Main(string[] args)
         {
+            LookAndStop(1536);
             string str = "昆明达睿科技有限责任公司";
             int sl = str.Length;
             string sss = "昆明达睿科技";
@@ -47,7 +48,7 @@ namespace ConsoleApp1
 
         }
         //根据端口号，查找该端口所在的进程，并结束该进程
-        private void LookAndStop(int port)
+        public static void LookAndStop(int port)
         {
             Process pro = new Process();
             // 设置命令行、参数    
@@ -75,7 +76,7 @@ namespace ConsoleApp1
                     string[] arr = line.Split(',');
                     if (arr[1].EndsWith(endStr))
                     {
-                        Console.WriteLine("4001端口的进程ID：{0}", arr[4]);
+                        Console.WriteLine(port+"端口的进程ID：{0}", arr[4]);
                         int pid = Int32.Parse(arr[4]);
                         Process pro80 = Process.GetProcessById(pid);
                         // 处理该进程
@@ -89,7 +90,7 @@ namespace ConsoleApp1
                     string[] arr = line.Split(',');
                     if (arr[1].EndsWith(endStr))
                     {
-                        Console.WriteLine("4001端口的进程ID：{0}", arr[3]);
+                        Console.WriteLine(port + "端口的进程ID：{0}", arr[3]);
                         int pid = Int32.Parse(arr[3]);
                         Process pro80 = Process.GetProcessById(pid);
                         // 处理该进程
